@@ -3,7 +3,7 @@ FROM bellsoft/liberica-openjdk-debian:17.0.11-cds
 #FROM bellsoft/liberica-openjdk-debian:21.0.5-cds
 #FROM findepi/graalvm:java17-native
 
-LABEL maintainer="Lion Li"
+LABEL maintainer="YiXia"
 
 RUN mkdir -p /ruoyi/server/logs \
     /ruoyi/server/temp \
@@ -13,11 +13,15 @@ WORKDIR /ruoyi/server
 
 ENV SERVER_PORT=8080 LANG=C.UTF-8 LC_ALL=C.UTF-8 JAVA_OPTS=""
 
-EXPOSE ${SERVER_PORT}
-
+ARG JAR_FILE
 ADD ./target/ruoyi-admin.jar ./app.jar
 # 工作流字体文件
-ADD ./zhFonts/ /usr/share/fonts/zhFonts/
+COPY ./zhFonts/ /usr/share/fonts/zhFonts/
+
+EXPOSE ${SERVER_PORT}
+
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 SHELL ["/bin/bash", "-c"]
 
