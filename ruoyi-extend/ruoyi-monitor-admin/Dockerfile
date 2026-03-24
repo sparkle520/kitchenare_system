@@ -3,7 +3,7 @@ FROM bellsoft/liberica-openjdk-debian:17.0.11-cds
 #FROM bellsoft/liberica-openjdk-debian:21.0.5-cds
 #FROM findepi/graalvm:java17-native
 
-LABEL maintainer="Lion Li"
+LABEL maintainer="YiXia"
 
 RUN mkdir -p /ruoyi/monitor/logs
 
@@ -13,7 +13,8 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 JAVA_OPTS=""
 
 EXPOSE 9090
 
-ADD ./target/ruoyi-monitor-admin.jar ./app.jar
+ARG JAR_FILE
+COPY ${JAR_FILE} ./app.jar
 
 SHELL ["/bin/bash", "-c"]
 
