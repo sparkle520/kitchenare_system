@@ -3,6 +3,7 @@ package org.dromara.generator.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
@@ -483,6 +484,7 @@ public class GenTableServiceImpl extends ServiceImpl<GenTableMapper, GenTable> i
                 prevColumn.setIsIncrement(column.getIsIncrement());
                 prevColumn.setSort(column.getSort());
                 prevColumn.setUpdateTime(DateUtils.getNowDate());
+                prevColumn.setColumnComment(column.getColumnComment());
                 saveColumns.add(prevColumn);
             } else {
                 GenUtils.initColumnField(column, tableVo);
@@ -507,8 +509,9 @@ public class GenTableServiceImpl extends ServiceImpl<GenTableMapper, GenTable> i
         if (!genTables.isEmpty()) {
             GenTableVo genTableVo = genTables.get(0);
             GenTable genTable = MapstructUtils.convert(genTableVo, GenTable.class);
-            genTable.setFunctionName(genTableVo.getFunctionName());
+            genTable.setFunctionName(StrUtil.isBlank(genTableVo.getFunctionName()) ? GenUtils.replaceText(genTableVo.getTableComment()) : genTableVo.getFunctionName());
             genTable.setTableComment(genTableVo.getTableComment());
+            genTable.setTableId(tableVo.getTableId());
             baseMapper.updateById(genTable);
         }
     }
