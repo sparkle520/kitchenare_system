@@ -12,7 +12,7 @@ set MonitorAdminName=ruoyi-monitor-admin
 set SnailjobName=ruoyi-snailjob-server
 
 set Namespace=ruoyi-tdesign
-set Version=1.4.0
+set Version=1.4.1
 
 ECHO.
 	ECHO.  [1] docker build %AdminName%.jar

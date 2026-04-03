@@ -17,7 +17,7 @@ MonitorAdminName="ruoyi-monitor-admin"
 SnailjobName="ruoyi-snailjob-server"
 
 Namespace="ruoyi-tdesign"
-Version="1.4.0"
+Version="1.4.1"
 
 # 显示菜单
 echo ""
