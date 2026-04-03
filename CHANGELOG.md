@@ -1,3 +1,59 @@
+## 🌈 1.4.1 `2026-4-3`
+
+### 🚀 New Features
+- 提供两种打包docker镜像的方式
+- maven插件在根pom中统一配置
+### 🔥 Performance
+- 单列表单和多列表单，上下间距明显不一致(#ICJ7BF)
+### 🐞 Bug Fixes
+- 处理xml多行换行报错问题
+- 代码同步时，更新字段描述和表描述
+- 修改PG数据库sql文件适配pg17 by @GerhardYang in [#100](https://github.com/ruoyi-tdesign/ruoyi-tdesign/pull/100)
+- jsencrypt版本固定
+- 修改在线用户弹框错误的BUG by @WWTBNBWN in [#97](https://github.com/ruoyi-tdesign/ruoyi-tdesign/pull/97)
+- 第三方登入失败BUG修改（删除不必要的租户） by @WWTBNBWN in [#96](https://github.com/ruoyi-tdesign/ruoyi-tdesign/pull/96)
+- 修复文件上传失败；文件管理查看详情出现多个窗口
+- 依赖选项方式问题修复
+- 上传流程部署文件报错(#ICYOOC)
+- 工作流path与icon值相反的sql问题
+- 修复非web环境下获取用户对象报错问题
+- 分割菜单模式下，显示菜单不准确
+- monitor启动报错问题; 删除冗余文件
+### 🏡 Chore
+- 删除重复的流程sql脚本
+- 删除默认密码
+### 🔨 Dependency Upgrades
+#### 🔨 java pom
+- Add to x-file-storage-2.3.0
+#### 🔨 node package
+- Upgrade to @vueuse/core@^13.2.0
+- Upgrade to axios@^1.9.0
+- Upgrade to jsencrypt@3.3.2
+- Upgrade to pinia@~3.0.2
+- Upgrade to pinia-plugin-persistedstate@~4.3.0
+- Upgrade to tdesign-icons-vue-next@0.3.7
+- Upgrade to tdesign-vue-next@1.15.2
+- Upgrade to tinymce@^7.8.0
+- Upgrade to vue-router@~4.5.
+- Upgrade to @commitlint/config-conventional@^19.8.0
+- Upgrade to @types/lodash@^4.17.16
+- Upgrade to @types/prismjs@^1.26.5
+- Upgrade to @types/qs@^6.9.18
+- Upgrade to @vitejs/plugin-vue@^5.2.3
+- Upgrade to @vitejs/plugin-vue-jsx@^4.1.2
+- Upgrade to less@^4.3.0
+- Upgrade to postcss-html@^1.8.0
+- Upgrade to typescript@~5.8.3
+- Upgrade to unocss@^0.65.4
+- Upgrade to unplugin-auto-import@^19.1.2
+- Upgrade to unplugin-vue-components@^28.5.0
+- Upgrade to vite@6.3.4
+- Upgrade to vue-tsc@2.2.10
+## 🎉New Contributors
+* @GerhardYang made their first contribution in https://github.com/ruoyi-tdesign/ruoyi-tdesign/pull/100
+
+**Full Changelog**: https://github.com/ruoyi-tdesign/ruoyi-tdesign/compare/v1.4.0...v1.4.1
+
 ## 🌈 1.4.0 `2025-4-23`
 > 本次更新需要执行`update_1.3.1-1.4.0.sql`脚本<br>
 > 本次更新改动较大，请谨慎升级。<br>
