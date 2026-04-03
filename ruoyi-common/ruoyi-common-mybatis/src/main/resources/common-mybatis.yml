@@ -5,6 +5,8 @@ mybatis-plus:
   # 启动时是否检查 MyBatis XML 文件的存在，默认不检查
   checkConfigLocation: false
   configuration:
+    # 开启mybatis的去除换行语句(通用性可能没那么好,无法处理单行注释—或#这样的)
+    shrink-whitespaces-in-sql: true
     # 自动驼峰命名规则（camel case）映射
     mapUnderscoreToCamelCase: true
     # MyBatis 自动映射策略
