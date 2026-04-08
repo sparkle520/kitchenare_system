@@ -287,10 +287,9 @@ public class ExcelUtil {
             .registerWriteHandler(new DataWriteHandler(data.get(0).getClass()))
             .build();
         WriteSheet writeSheet = EasyExcel.writerSheet().build();
-        FillConfig fillConfig = FillConfig.builder().forceNewRow(Boolean.TRUE).build();
         // 单表多数据导出 模板格式为 {.属性}
         for (T d : data) {
-            excelWriter.fill(d, fillConfig, writeSheet);
+            excelWriter.fill(d, writeSheet);
         }
         excelWriter.finish();
     }
@@ -366,7 +365,7 @@ public class ExcelUtil {
                 // 多表导出必须使用 FillWrapper
                 excelWriter.fill(new FillWrapper(map.getKey(), (Collection<?>) map.getValue()), fillConfig, writeSheet);
             } else {
-                excelWriter.fill(map.getValue(), fillConfig, writeSheet);
+                excelWriter.fill(map.getValue(), writeSheet);
             }
         }
         excelWriter.finish();
