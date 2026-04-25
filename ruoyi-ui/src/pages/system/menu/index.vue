@@ -148,7 +148,7 @@
             </t-col>
             <t-col v-if="form.menuType !== 'F'" :span="12">
               <t-form-item label="菜单图标" name="icon">
-                <icon-select v-model="form.icon" />
+                <iconfont-select v-model="form.icon" filterable />
               </t-form-item>
             </t-col>
             <t-col :span="6">
@@ -399,7 +399,7 @@ import { computed, getCurrentInstance, ref } from 'vue';
 
 import { addMenu, delMenu, getMenu, listMenu, updateMenu } from '@/api/system/menu';
 import type { SysMenuForm, SysMenuQuery, SysMenuVo } from '@/api/system/model/menuModel';
-import IconSelect from '@/components/icon-select/index.vue';
+import IconfontSelect from '@/components/IconfontSelect.vue';
 import type { DictModel } from '@/utils/dict';
 
 const { proxy } = getCurrentInstance();
