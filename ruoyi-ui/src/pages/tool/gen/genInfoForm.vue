@@ -95,7 +95,7 @@
       </t-col>
       <t-col :span="6">
         <t-form-item name="info.tableOptions.menuIcon" label="菜单图标">
-          <icon-select v-model="info.tableOptions.menuIcon" />
+          <iconfont-select v-model="info.tableOptions.menuIcon" filterable />
         </t-form-item>
       </t-col>
       <t-col v-if="info.genType === '1'" :span="12">
@@ -114,8 +114,8 @@
                 :options="[{ content: '恢复默认的生成基础路径', value: 1 }]"
                 @click="info.genPath = '/'"
               >
-                <t-button theme="default" variant="outline"
-                  >最近路径快速选择
+                <t-button theme="default" variant="outline">
+                  最近路径快速选择
                   <template #suffix>
                     <chevron-down-icon size="16" />
                   </template>
@@ -241,6 +241,7 @@ import { getCurrentInstance, ref, toRefs } from 'vue';
 import { listMenu } from '@/api/system/menu';
 import type { SysMenuVo } from '@/api/system/model/menuModel';
 import type { GenTableVo } from '@/api/tool/model/genModel';
+import IconfontSelect from '@/components/IconfontSelect.vue';
 
 const props = defineProps({
   info: {

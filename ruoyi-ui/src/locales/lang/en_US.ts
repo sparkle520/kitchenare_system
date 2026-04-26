@@ -55,6 +55,7 @@ export default {
       user: 'Profile',
       signOut: 'Sign Out',
       setting: 'Setting',
+      modifyPassword: 'Modify Password',
     },
     notice: {
       title: 'Notification Center',
@@ -640,6 +641,7 @@ export default {
       accountLogin: 'Login with Account',
       phoneLogin: 'Login with Mobile Phone',
       loginSuccess: 'Login successful',
+      loading: 'Logging In...',
       countdown: 'Resend after {count} seconds',
       input: {
         account: 'please enter account',

@@ -55,6 +55,7 @@ export default {
       user: '个人中心',
       signOut: '退出登录',
       setting: '系统设置',
+      modifyPassword: '修改密码',
     },
     notice: {
       title: '通知中心',
@@ -640,6 +641,7 @@ export default {
       accountLogin: '使用账号登录',
       phoneLogin: '使用手机号登录',
       loginSuccess: '登录成功',
+      loading: '登录中...',
       countdown: '{count}秒后可重发',
       input: {
         account: '请输入账号',

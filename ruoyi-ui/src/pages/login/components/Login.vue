@@ -136,7 +136,7 @@ import {
 } from 'tdesign-icons-vue-next';
 import type { FormInstanceFunctions, FormRule, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { getCurrentInstance, computed, ref } from 'vue';
+import { computed, getCurrentInstance, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import { getCodeImg } from '@/api/login';
