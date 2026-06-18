@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.MemberAddressMapper">
+
+    <resultMap id="MemberAddressResult" autoMapping="true" type="org.dromara.kitchenware.domain.MemberAddress">
+        <id property="addressId" column="address_id"/>
+    </resultMap>
+    <resultMap id="MemberAddressResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.MemberAddressVo">
+        <id property="addressId" column="address_id"/>
+    </resultMap>
+
+    <sql id="selectMemberAddressVo">
+        select ma.address_id, ma.tenant_id, ma.member_id, ma.receiver_name, ma.receiver_mobile, ma.province, ma.city, ma.district, ma.detail_address, ma.is_default, ma.create_by, ma.create_time, ma.update_by, ma.update_time, ma.del_flag from member_address ma
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.MemberAddressQuery" resultMap="MemberAddressResultVo">
+        <include refid="selectMemberAddressVo"/>
+        <where>
+            <if test="memberId != null"> and ma.member_id = #{memberId}</if>
+            <if test="receiverName != null and receiverName != ''"> and ma.receiver_name like concat(concat('%', #{receiverName}), '%')</if>
+            <if test="receiverMobile != null and receiverMobile != ''"> and ma.receiver_mobile = #{receiverMobile}</if>
+            <if test="province != null and province != ''"> and ma.province = #{province}</if>
+            <if test="city != null and city != ''"> and ma.city = #{city}</if>
+            <if test="district != null and district != ''"> and ma.district = #{district}</if>
+            <if test="detailAddress != null and detailAddress != ''"> and ma.detail_address = #{detailAddress}</if>
+            <if test="isDefault != null and isDefault != ''"> and ma.is_default = #{isDefault}</if>
+            and ma.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>

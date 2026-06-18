@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.CouponTemplateMapper">
+
+    <resultMap id="CouponTemplateResult" autoMapping="true" type="org.dromara.kitchenware.domain.CouponTemplate">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="CouponTemplateResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.CouponTemplateVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectCouponTemplateVo">
+        select ct.id, ct.coupon_type, ct.denomination, ct.full_money, ct.total_count, ct.receive_count, ct.valid_days, ct.start_time, ct.end_time, ct.scope_type, ct.status, ct.create_by, ct.create_time, ct.update_by, ct.update_time, ct.del_flag from coupon_template ct
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.CouponTemplateQuery" resultMap="CouponTemplateResultVo">
+        <include refid="selectCouponTemplateVo"/>
+        <where>
+            <if test="couponType != null"> and ct.coupon_type = #{couponType}</if>
+            <if test="denomination != null"> and ct.denomination = #{denomination}</if>
+            <if test="fullMoney != null"> and ct.full_money = #{fullMoney}</if>
+            <if test="totalCount != null"> and ct.total_count = #{totalCount}</if>
+            <if test="receiveCount != null"> and ct.receive_count = #{receiveCount}</if>
+            <if test="validDays != null"> and ct.valid_days = #{validDays}</if>
+            <if test="startTime != null"> and ct.start_time = #{startTime}</if>
+            <if test="endTime != null"> and ct.end_time = #{endTime}</if>
+            <if test="scopeType != null"> and ct.scope_type = #{scopeType}</if>
+            <if test="status != null"> and ct.status = #{status}</if>
+            and ct.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>

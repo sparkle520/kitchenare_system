@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.SupplierMapper">
+
+    <resultMap id="SupplierResult" autoMapping="true" type="org.dromara.kitchenware.domain.Supplier">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="SupplierResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.SupplierVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectSupplierVo">
+        select s.id, s.supplier_name, s.contact, s.phone, s.address, s.remark, s.create_by, s.create_time, s.update_by, s.update_time, s.del_flag from supplier s
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.SupplierQuery" resultMap="SupplierResultVo">
+        <include refid="selectSupplierVo"/>
+        <where>
+            <if test="supplierName != null and supplierName != ''"> and s.supplier_name like concat(concat('%', #{supplierName}), '%')</if>
+            <if test="contact != null and contact != ''"> and s.contact = #{contact}</if>
+            <if test="phone != null and phone != ''"> and s.phone = #{phone}</if>
+            <if test="address != null and address != ''"> and s.address = #{address}</if>
+            and s.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>

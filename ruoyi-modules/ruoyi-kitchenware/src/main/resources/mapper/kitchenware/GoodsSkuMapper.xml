@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.GoodsSkuMapper">
+
+    <resultMap id="GoodsSkuResult" autoMapping="true" type="org.dromara.kitchenware.domain.GoodsSku">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="GoodsSkuResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.GoodsSkuVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectGoodsSkuVo">
+        select gs.id, gs.goods_id, gs.sku_attr, gs.sku_code, gs.unit, gs.stock_num, gs.safe_stock, gs.purchase_price, gs.sale_price, gs.pic_url, gs.status, gs.create_by, gs.create_time, gs.update_by, gs.update_time, gs.del_flag from goods_sku gs
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.GoodsSkuQuery" resultMap="GoodsSkuResultVo">
+        <include refid="selectGoodsSkuVo"/>
+        <where>
+            <if test="goodsId != null"> and gs.goods_id = #{goodsId}</if>
+            <if test="skuAttr != null and skuAttr != ''"> and gs.sku_attr = #{skuAttr}</if>
+            <if test="skuCode != null and skuCode != ''"> and gs.sku_code = #{skuCode}</if>
+            <if test="unit != null and unit != ''"> and gs.unit = #{unit}</if>
+            <if test="stockNum != null"> and gs.stock_num = #{stockNum}</if>
+            <if test="safeStock != null"> and gs.safe_stock = #{safeStock}</if>
+            <if test="purchasePrice != null"> and gs.purchase_price = #{purchasePrice}</if>
+            <if test="salePrice != null"> and gs.sale_price = #{salePrice}</if>
+            <if test="picUrl != null and picUrl != ''"> and gs.pic_url = #{picUrl}</if>
+            <if test="status != null"> and gs.status = #{status}</if>
+            and gs.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.PurchaseItemMapper">
+
+    <resultMap id="PurchaseItemResult" autoMapping="true" type="org.dromara.kitchenware.domain.PurchaseItem">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="PurchaseItemResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.PurchaseItemVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectPurchaseItemVo">
+        select pi.id, pi.purchase_id, pi.sku_id, pi.buy_num, pi.buy_price, pi.subtotal, pi.create_by, pi.create_time, pi.update_by, pi.update_time, pi.del_flag from purchase_item pi
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.PurchaseItemQuery" resultMap="PurchaseItemResultVo">
+        <include refid="selectPurchaseItemVo"/>
+        <where>
+            <if test="purchaseId != null"> and pi.purchase_id = #{purchaseId}</if>
+            <if test="skuId != null"> and pi.sku_id = #{skuId}</if>
+            <if test="buyNum != null"> and pi.buy_num = #{buyNum}</if>
+            <if test="buyPrice != null"> and pi.buy_price = #{buyPrice}</if>
+            <if test="subtotal != null"> and pi.subtotal = #{subtotal}</if>
+            and pi.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>

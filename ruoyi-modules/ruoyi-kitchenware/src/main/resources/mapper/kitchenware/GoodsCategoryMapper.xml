@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.GoodsCategoryMapper">
+
+    <resultMap id="GoodsCategoryResult" autoMapping="true" type="org.dromara.kitchenware.domain.GoodsCategory">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="GoodsCategoryResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.GoodsCategoryVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectGoodsCategoryVo">
+        select gc.id, gc.category_name, gc.sort, gc.remark, gc.create_by, gc.create_time, gc.update_by, gc.update_time, gc.del_flag from goods_category gc
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.GoodsCategoryQuery" resultMap="GoodsCategoryResultVo">
+        <include refid="selectGoodsCategoryVo"/>
+        <where>
+            <if test="categoryName != null and categoryName != ''"> and gc.category_name like concat(concat('%', #{categoryName}), '%')</if>
+            <if test="sort != null"> and gc.sort = #{sort}</if>
+            and gc.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>

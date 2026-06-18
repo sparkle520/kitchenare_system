@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.StockRecordMapper">
+
+    <resultMap id="StockRecordResult" autoMapping="true" type="org.dromara.kitchenware.domain.StockRecord">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="StockRecordResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.StockRecordVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectStockRecordVo">
+        select sr.id, sr.sku_id, sr.change_type, sr.change_num, sr.stock_after, sr.relation_id, sr.operate_time, sr.create_by, sr.create_time, sr.update_by, sr.update_time, sr.del_flag from stock_record sr
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.StockRecordQuery" resultMap="StockRecordResultVo">
+        <include refid="selectStockRecordVo"/>
+        <where>
+            <if test="skuId != null"> and sr.sku_id = #{skuId}</if>
+            <if test="changeType != null"> and sr.change_type = #{changeType}</if>
+            <if test="changeNum != null"> and sr.change_num = #{changeNum}</if>
+            <if test="stockAfter != null"> and sr.stock_after = #{stockAfter}</if>
+            <if test="relationId != null"> and sr.relation_id = #{relationId}</if>
+            <if test="operateTime != null"> and sr.operate_time = #{operateTime}</if>
+            and sr.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>
