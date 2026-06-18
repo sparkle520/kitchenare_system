@@ -128,3 +128,6 @@
 | ![](./doc/images/应用管理.png)       | ![](./doc/images/登录日志.png)   |
 | ![](./doc/images/在线用户.png)       | ![](./doc/images/缓存监控.png)   |
 | ![](./doc/images/代码生成.png)       | ![](./doc/images/个人中心.png)   |
+#   k i t c h e n a r e _ s y s t e m  
+ #   k i t c h e n a r e _ s y s t e m  
+ 
