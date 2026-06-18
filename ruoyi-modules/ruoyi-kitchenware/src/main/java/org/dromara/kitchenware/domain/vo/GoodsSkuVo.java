@@ -41,7 +41,7 @@ public class GoodsSkuVo implements Serializable {
     /**
      * 规格JSON 如{"材质":"304不锈钢","尺寸":"32cm"}
      */
-    @ExcelProperty(value = "规格JSON 如{"材质":"304不锈钢","尺寸":"32cm"}")
+    @ExcelProperty(value = "规格JSON")
     private String skuAttr;
 
     /**
@@ -93,13 +93,13 @@ public class GoodsSkuVo implements Serializable {
     private Integer status;
 
     /**
-     * 
+     *
      */
     @ExcelProperty(value = "")
     private Date createTime;
 
     /**
-     * 
+     *
      */
     @ExcelProperty(value = "")
     private Date updateTime;

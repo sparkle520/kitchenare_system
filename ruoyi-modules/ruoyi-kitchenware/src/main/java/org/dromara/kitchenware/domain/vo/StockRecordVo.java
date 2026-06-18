@@ -38,9 +38,15 @@ public class StockRecordVo implements Serializable {
     private Long skuId;
 
     /**
+     * SKU编码
+     */
+    @ExcelProperty(value = "SKU编码")
+    private String skuCode;
+
+    /**
      * 1采购入库 2销售出库 3退货入库 4损耗扣库
      */
-    @ExcelProperty(value = "1采购入库 2销售出库 3退货入库 4损耗扣库")
+    @ExcelProperty(value = "变更类型")
     private Integer changeType;
 
     /**

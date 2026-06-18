@@ -12,19 +12,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectStockRecordVo">
-        select sr.id, sr.sku_id, sr.change_type, sr.change_num, sr.stock_after, sr.relation_id, sr.operate_time, sr.create_by, sr.create_time, sr.update_by, sr.update_time, sr.del_flag from stock_record sr
+        select sr.id, sr.sku_id, sr.change_type, sr.change_num, sr.stock_after, sr.relation_id, sr.operate_time, sr.create_by, sr.create_time, sr.update_by, sr.update_time, sr.del_flag, gs.sku_code from stock_record sr
+        left join goods_sku gs on sr.sku_id = gs.id
     </sql>
     <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.StockRecordQuery" resultMap="StockRecordResultVo">
         <include refid="selectStockRecordVo"/>
         <where>
-            <if test="skuId != null"> and sr.sku_id = #{skuId}</if>
+            <if test="skuCode != null and skuCode != ''"> and gs.sku_code like concat('%', #{skuCode}, '%')</if>
             <if test="changeType != null"> and sr.change_type = #{changeType}</if>
-            <if test="changeNum != null"> and sr.change_num = #{changeNum}</if>
-            <if test="stockAfter != null"> and sr.stock_after = #{stockAfter}</if>
-            <if test="relationId != null"> and sr.relation_id = #{relationId}</if>
             <if test="operateTime != null"> and sr.operate_time = #{operateTime}</if>
             and sr.del_flag = '0'
         </where>
+        order by sr.operate_time desc
     </select>
 
 </mapper>

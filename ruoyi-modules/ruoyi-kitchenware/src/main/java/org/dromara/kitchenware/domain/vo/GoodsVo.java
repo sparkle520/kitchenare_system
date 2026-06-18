@@ -56,6 +56,24 @@ public class GoodsVo implements Serializable {
     private String detail;
 
     /**
+     * 商品主图地址
+     */
+    @ExcelProperty(value = "商品主图地址")
+    private String mainImg;
+
+    /**
+     * 轮播多图，逗号分隔
+     */
+    @ExcelProperty(value = "轮播多图")
+    private String slideImages;
+
+    /**
+     * 详情长图
+     */
+    @ExcelProperty(value = "详情长图")
+    private String detailImg;
+
+    /**
      * 1上架 0下架
      */
     @ExcelProperty(value = "1上架 0下架")

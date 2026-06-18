@@ -40,8 +40,8 @@ public class GoodsSkuBo implements Serializable {
     /**
      * 规格JSON 如{"材质":"304不锈钢","尺寸":"32cm"}
      */
-    @NotBlank(message = "规格JSON 如{"材质":"304不锈钢","尺寸":"32cm"}不能为空", groups = {AddGroup.class, EditGroup.class})
-    @Length(max = 500, message = "规格JSON 如{"材质":"304不锈钢","尺寸":"32cm"}不能大于{max}个字符", groups = {AddGroup.class, EditGroup.class})
+    @NotBlank(message = "规格不能为空", groups = {AddGroup.class, EditGroup.class})
+    @Length(max = 500, message = "规格JSON 不能大于{max}个字符", groups = {AddGroup.class, EditGroup.class})
     private String skuAttr;
     /**
      * 货号条码

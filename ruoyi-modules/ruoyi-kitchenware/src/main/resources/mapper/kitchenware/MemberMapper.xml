@@ -29,4 +29,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
+    <select id="selectByMobile" parameterType="String" resultMap="MemberResultVo">
+        <include refid="selectMemberVo"/>
+        where m.mobile = #{mobile} and m.del_flag = '0'
+    </select>
+
 </mapper>

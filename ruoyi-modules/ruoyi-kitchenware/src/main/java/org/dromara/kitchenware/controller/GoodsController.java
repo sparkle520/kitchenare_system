@@ -2,6 +2,7 @@ package org.dromara.kitchenware.controller;
 
 import java.util.List;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.*;
 import cn.dev33.satoken.annotation.SaCheckPermission;
@@ -34,7 +35,7 @@ import org.dromara.common.mybatis.core.page.TableDataInfo;
 @RequestMapping("/kitchenware/goods")
 public class GoodsController extends BaseController {
 
-    @Autowired
+    @Resource
     private IGoodsService goodsService;
 
     /**

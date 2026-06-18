@@ -2,7 +2,9 @@ package org.dromara.kitchenware.domain.vo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import org.dromara.kitchenware.domain.Purchase;
+import org.dromara.kitchenware.domain.PurchaseItem;
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
 import org.dromara.common.excel.annotation.ExcelDictFormat;
@@ -67,6 +69,11 @@ public class PurchaseVo implements Serializable {
      */
     @ExcelProperty(value = "单据备注")
     private String note;
+
+    /**
+     * 入库商品明细列表
+     */
+    private List<PurchaseItem> purchaseItems;
 
     /**
      * 

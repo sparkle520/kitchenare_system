@@ -17,12 +17,17 @@ import org.dromara.common.mybatis.core.domain.BasePageQuery;
 public class StockRecordQuery extends BasePageQuery {
 
     /**
+     * SKU编码（用于搜索）
+     */
+    private String skuCode;
+
+    /**
      * 操作SKU
      */
     private Long skuId;
 
     /**
-     * 1采购入库 2销售出库 3退货入库 4损耗扣库
+     * 变更类型：1采购入库 2销售出库 3退货入库 4损耗扣库
      */
     private Integer changeType;
 

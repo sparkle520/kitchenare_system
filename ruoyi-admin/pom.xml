@@ -87,6 +87,13 @@
             <artifactId>ruoyi-demo</artifactId>
         </dependency>
 
+        <!-- 厨房用具模块 -->
+        <dependency>
+            <groupId>org.dromara</groupId>
+            <artifactId>ruoyi-kitchenware</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
         <!--  工作流模块  -->
         <dependency>
             <groupId>org.dromara</groupId>

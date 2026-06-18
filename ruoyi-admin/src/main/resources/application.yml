@@ -122,6 +122,7 @@ sa-token:
         - /demo/**
         - /workflow/**
         - /warm-flow/**
+        - /kitchenware/**
     user:
       # 允许动态设置 token 有效期
       dynamic-active-timeout: true
@@ -163,7 +164,7 @@ security:
 # 多租户配置
 tenant:
   # 是否开启
-  enable: true
+  enable: false
   # 排除表
   excludes:
     - sys_menu

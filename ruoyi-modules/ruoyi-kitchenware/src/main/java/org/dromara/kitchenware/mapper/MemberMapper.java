@@ -23,4 +23,12 @@ public interface MemberMapper extends BaseMapperPlus<Member, MemberVo> {
      * @return {@link MemberVo}
      */
     List<MemberVo> queryList(MemberQuery query);
+
+    /**
+     * 根据手机号查询会员
+     *
+     * @param mobile 手机号
+     * @return {@link MemberVo}
+     */
+    MemberVo selectByMobile(String mobile);
 }

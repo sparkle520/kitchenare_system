@@ -1,6 +1,7 @@
 package org.dromara.kitchenware.domain.bo;
 
 import org.dromara.kitchenware.domain.Purchase;
+import org.dromara.kitchenware.domain.PurchaseItem;
 import org.dromara.common.mybatis.core.domain.BaseEntity;
 import org.dromara.common.core.validate.AddGroup;
 import org.dromara.common.core.validate.EditGroup;
@@ -11,6 +12,7 @@ import lombok.EqualsAndHashCode;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -63,4 +65,9 @@ public class PurchaseBo implements Serializable {
      */
     @Length(max = 300, message = "单据备注不能大于{max}个字符", groups = {AddGroup.class, EditGroup.class})
     private String note;
+
+    /**
+     * 入库商品明细列表
+     */
+    private List<PurchaseItem> purchaseItems;
 }

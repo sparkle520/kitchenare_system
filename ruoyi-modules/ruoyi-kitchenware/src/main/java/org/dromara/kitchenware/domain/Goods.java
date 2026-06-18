@@ -47,6 +47,21 @@ public class Goods implements Serializable {
     private String detail;
 
     /**
+     * 商品主图地址
+     */
+    private String mainImg;
+
+    /**
+     * 轮播多图，逗号分隔
+     */
+    private String slideImages;
+
+    /**
+     * 详情长图
+     */
+    private String detailImg;
+
+    /**
      * 1上架 0下架
      */
     private Integer status;

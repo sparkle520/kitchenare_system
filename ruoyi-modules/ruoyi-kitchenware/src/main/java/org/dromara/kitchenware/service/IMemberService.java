@@ -65,4 +65,30 @@ public interface IMemberService extends IService<Member> {
      * @return 是否删除成功
      */
     Boolean deleteWithValidByIds(Collection<Long> ids);
+
+    /**
+     * 根据手机号查询会员
+     *
+     * @param mobile 手机号
+     * @return MemberVo
+     */
+    MemberVo queryByMobile(String mobile);
+
+    /**
+     * 更新会员最后登录时间
+     *
+     * @param memberId 会员ID
+     * @return 是否更新成功
+     */
+    Boolean updateLastLoginTime(Long memberId);
+
+    /**
+     * 会员注册
+     *
+     * @param mobile   手机号
+     * @param password 密码
+     * @param nickname 昵称
+     * @return 是否注册成功
+     */
+    Boolean registerMember(String mobile, String password, String nickname);
 }

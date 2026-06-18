@@ -52,6 +52,19 @@ public class GoodsBo implements Serializable {
      */
     private String detail;
     /**
+     * 商品主图地址
+     */
+    @NotBlank(message = "商品主图地址不能为空", groups = {AddGroup.class, EditGroup.class})
+    private String mainImg;
+    /**
+     * 轮播多图，逗号分隔
+     */
+    private String slideImages;
+    /**
+     * 详情长图
+     */
+    private String detailImg;
+    /**
      * 1上架 0下架
      */
     @NotNull(message = "1上架 0下架不能为空", groups = {AddGroup.class, EditGroup.class})
