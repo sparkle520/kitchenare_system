@@ -65,4 +65,29 @@ public interface IMemberAddressService extends IService<MemberAddress> {
      * @return 是否删除成功
      */
     Boolean deleteWithValidByIds(Collection<Long> ids);
+
+    /**
+     * 根据会员ID查询收货地址列表
+     *
+     * @param memberId 会员ID
+     * @return 收货地址列表
+     */
+    List<MemberAddressVo> queryByMemberId(Long memberId);
+
+    /**
+     * 获取会员默认收货地址
+     *
+     * @param memberId 会员ID
+     * @return 默认收货地址
+     */
+    MemberAddressVo getDefaultAddress(Long memberId);
+
+    /**
+     * 设置默认收货地址
+     *
+     * @param addressId 地址ID
+     * @param memberId 会员ID
+     * @return 是否成功
+     */
+    Boolean setDefaultAddress(Long addressId, Long memberId);
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.SaleOrderItemMapper">
+
+    <resultMap id="SaleOrderItemResult" autoMapping="true" type="org.dromara.kitchenware.domain.SaleOrderItem">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="SaleOrderItemVoResult" autoMapping="true" type="org.dromara.kitchenware.domain.vo.SaleOrderItemVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectSaleOrderItemVo">
+        select soi.id, soi.order_id, soi.goods_id, soi.sku_id,
+               soi.buy_num, soi.original_price, soi.sell_price, soi.subtotal,
+               soi.create_by, soi.create_time, soi.update_by, soi.update_time, soi.del_flag
+        from sale_order_item soi
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.SaleOrderItemQuery" resultMap="SaleOrderItemVoResult">
+        <include refid="selectSaleOrderItemVo"/>
+        <where>
+            <if test="orderId != null"> and soi.order_id = #{orderId}</if>
+            <if test="goodsId != null"> and soi.goods_id = #{goodsId}</if>
+            <if test="skuId != null"> and soi.sku_id = #{skuId}</if>
+            <if test="buyNum != null"> and soi.buy_num = #{buyNum}</if>
+            <if test="originalPrice != null"> and soi.original_price = #{originalPrice}</if>
+            <if test="sellPrice != null"> and soi.sell_price = #{sellPrice}</if>
+            <if test="subtotal != null"> and soi.subtotal = #{subtotal}</if>
+            and soi.del_flag = '0'
+        </where>
+    </select>
+
+    <select id="selectListByOrderId" resultMap="SaleOrderItemVoResult">
+        <include refid="selectSaleOrderItemVo"/>
+        where soi.order_id = #{orderId} and soi.del_flag = '0'
+    </select>
+
+</mapper>

@@ -13,6 +13,8 @@ import org.dromara.kitchenware.domain.vo.MemberAddressVo;
 import org.dromara.kitchenware.mapper.MemberAddressMapper;
 import org.dromara.kitchenware.service.IMemberAddressService;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -94,5 +96,45 @@ public class MemberAddressServiceImpl extends ServiceImpl<MemberAddressMapper, M
     @Transactional(rollbackFor = Exception.class)
     public Boolean deleteWithValidByIds(Collection<Long> ids) {
         return removeByIds(ids);
+    }
+
+    /**
+     * 根据会员ID查询收货地址列表
+     */
+    @Override
+    public List<MemberAddressVo> queryByMemberId(Long memberId) {
+        MemberAddressQuery query = new MemberAddressQuery();
+        query.setMemberId(memberId);
+        return baseMapper.queryList(query);
+    }
+
+    /**
+     * 获取会员默认收货地址
+     */
+    @Override
+    public MemberAddressVo getDefaultAddress(Long memberId) {
+        List<MemberAddressVo> list = queryByMemberId(memberId);
+        return list.stream()
+            .filter(addr -> "1".equals(addr.getIsDefault()))
+            .findFirst()
+            .orElse(list.isEmpty() ? null : list.get(0));
+    }
+
+    /**
+     * 设置默认收货地址
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean setDefaultAddress(Long addressId, Long memberId) {
+        // 先将所有地址设为非默认
+        MemberAddress reset = new MemberAddress();
+        reset.setMemberId(memberId);
+        reset.setIsDefault("0");
+        this.update(reset, new LambdaQueryWrapper<MemberAddress>().eq(MemberAddress::getMemberId, memberId));
+        // 设置指定地址为默认
+        MemberAddress address = new MemberAddress();
+        address.setAddressId(addressId);
+        address.setIsDefault("1");
+        return updateById(address);
     }
 }

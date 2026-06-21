@@ -1,5 +1,6 @@
 package org.dromara.kitchenware.domain.vo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import org.dromara.kitchenware.domain.Goods;
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
@@ -78,6 +79,11 @@ public class GoodsVo implements Serializable {
      */
     @ExcelProperty(value = "1上架 0下架")
     private Integer status;
+
+    /**
+     * SKU最低价格
+     */
+    private BigDecimal minPrice;
 
     /**
      * 

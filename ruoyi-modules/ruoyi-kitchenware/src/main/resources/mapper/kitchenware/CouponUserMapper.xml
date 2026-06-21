@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.CouponUserMapper">
+
+    <resultMap id="CouponUserResult" autoMapping="true" type="org.dromara.kitchenware.domain.CouponUser">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="CouponUserResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.CouponUserVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectCouponUserVo">
+        select cu.id, cu.template_id, cu.member_id, cu.receive_time, cu.valid_end, cu.use_order_id, cu.use_time, cu.coupon_status, cu.del_flag from coupon_user cu
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.CouponUserQuery" resultMap="CouponUserResultVo">
+        <include refid="selectCouponUserVo"/>
+        <where>
+            <if test="templateId != null"> and cu.template_id = #{templateId}</if>
+            <if test="memberId != null"> and cu.member_id = #{memberId}</if>
+            <if test="receiveTime != null"> and cu.receive_time = #{receiveTime}</if>
+            <if test="validEnd != null"> and cu.valid_end = #{validEnd}</if>
+            <if test="useOrderId != null"> and cu.use_order_id = #{useOrderId}</if>
+            <if test="useTime != null"> and cu.use_time = #{useTime}</if>
+            <if test="couponStatus != null"> and cu.coupon_status = #{couponStatus}</if>
+            and cu.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>

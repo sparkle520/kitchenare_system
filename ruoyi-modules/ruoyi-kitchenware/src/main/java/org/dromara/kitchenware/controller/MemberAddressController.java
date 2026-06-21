@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.*;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaMode;
+import cn.dev33.satoken.annotation.SaIgnore;
+import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -100,5 +102,89 @@ public class MemberAddressController extends BaseController {
     @DeleteMapping("/{addressIds}")
     public R<Void> remove(@NotEmpty(message = "主键不能为空") @PathVariable Long[] addressIds) {
         return toAjax(memberAddressService.deleteWithValidByIds(List.of(addressIds)));
+    }
+
+    // ==================== 会员端接口 ====================
+
+    /**
+     * 获取当前会员的收货地址列表
+     */
+    @SaIgnore
+    @GetMapping("/member/list")
+    public R<List<MemberAddressVo>> memberList() {
+        Long memberId = StpUtil.getLoginIdAsLong();
+        List<MemberAddressVo> list = memberAddressService.queryByMemberId(memberId);
+        return R.ok(list);
+    }
+
+    /**
+     * 获取当前会员的默认收货地址
+     */
+    @SaIgnore
+    @GetMapping("/member/default")
+    public R<MemberAddressVo> getMemberDefaultAddress() {
+        Long memberId = StpUtil.getLoginIdAsLong();
+        MemberAddressVo address = memberAddressService.getDefaultAddress(memberId);
+        return R.ok(address);
+    }
+
+    /**
+     * 获取收货地址详情
+     */
+    @SaIgnore
+    @GetMapping("/member/{addressId}")
+    public R<MemberAddressVo> getMemberAddressInfo(@NotNull(message = "主键不能为空") @PathVariable Long addressId) {
+        return R.ok(memberAddressService.queryById(addressId));
+    }
+
+    /**
+     * 新增收货地址（会员端）
+     */
+    @SaIgnore
+    @Log(title = "会员收货地址", businessType = BusinessType.INSERT)
+    @RepeatSubmit()
+    @PostMapping("/member")
+    public R<Void> memberAdd(@Validated(AddGroup.class) @RequestBody MemberAddressBo bo) {
+        Long memberId = StpUtil.getLoginIdAsLong();
+        bo.setMemberId(memberId);
+        // 如果是第一个地址，自动设为默认；否则设为非默认
+        List<MemberAddressVo> existList = memberAddressService.queryByMemberId(memberId);
+        if (existList.isEmpty()) {
+            bo.setIsDefault("1");
+        } else {
+            bo.setIsDefault("0");
+        }
+        return toAjax(memberAddressService.insertByBo(bo));
+    }
+
+    /**
+     * 修改收货地址（会员端）
+     */
+    @SaIgnore
+    @Log(title = "会员收货地址", businessType = BusinessType.UPDATE)
+    @RepeatSubmit()
+    @PutMapping("/member")
+    public R<Void> memberEdit(@Validated(EditGroup.class) @RequestBody MemberAddressBo bo) {
+        return toAjax(memberAddressService.updateByBo(bo));
+    }
+
+    /**
+     * 删除收货地址（会员端）
+     */
+    @SaIgnore
+    @Log(title = "会员收货地址", businessType = BusinessType.DELETE)
+    @DeleteMapping("/member/{addressIds}")
+    public R<Void> memberRemove(@NotEmpty(message = "主键不能为空") @PathVariable Long[] addressIds) {
+        return toAjax(memberAddressService.deleteWithValidByIds(List.of(addressIds)));
+    }
+
+    /**
+     * 设置默认收货地址
+     */
+    @SaIgnore
+    @PostMapping("/member/default/{addressId}")
+    public R<Void> setMemberDefaultAddress(@NotNull(message = "主键不能为空") @PathVariable Long addressId) {
+        Long memberId = StpUtil.getLoginIdAsLong();
+        return toAjax(memberAddressService.setDefaultAddress(addressId, memberId));
     }
 }

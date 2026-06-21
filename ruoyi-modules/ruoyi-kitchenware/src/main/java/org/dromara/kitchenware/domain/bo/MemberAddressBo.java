@@ -34,7 +34,7 @@ public class MemberAddressBo implements Serializable {
     /**
      * 会员ID，关联member表
      */
-    @NotNull(message = "会员ID，关联member表不能为空", groups = {AddGroup.class, EditGroup.class})
+    @NotNull(message = "会员ID，关联member表不能为空", groups = {EditGroup.class})
     private Long memberId;
     /**
      * 收货人姓名
@@ -75,7 +75,7 @@ public class MemberAddressBo implements Serializable {
     /**
      * 是否默认地址 0否 1是
      */
-    @NotBlank(message = "是否默认地址 0否 1是不能为空", groups = {AddGroup.class, EditGroup.class})
+    @NotBlank(message = "是否默认地址 0否 1是不能为空", groups = {EditGroup.class})
     @Length(max = 1, message = "是否默认地址 0否 1是不能大于{max}个字符", groups = {AddGroup.class, EditGroup.class})
     private String isDefault;
 }

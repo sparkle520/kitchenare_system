@@ -12,7 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectGoodsVo">
-        select g.id, g.category_id, g.goods_name, g.brand, g.detail, g.status, g.create_by, g.create_time, g.update_by, g.update_time, g.del_flag from goods g
+        select g.id, g.category_id, g.goods_name, g.brand, g.detail, g.main_img, g.slide_images, g.detail_img, g.status, g.create_by, g.create_time, g.update_by, g.update_time, g.del_flag,
+        (select min(s.sale_price) from goods_sku s where s.goods_id = g.id and s.status = 1 and s.del_flag = '0') as min_price
+        from goods g
     </sql>
     <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.GoodsQuery" resultMap="GoodsResultVo">
         <include refid="selectGoodsVo"/>

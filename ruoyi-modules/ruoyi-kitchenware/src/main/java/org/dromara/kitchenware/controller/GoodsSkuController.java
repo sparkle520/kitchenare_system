@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.*;
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.annotation.SaMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class GoodsSkuController extends BaseController {
     /**
      * 查询商品规格SKU列表
      */
-    @SaCheckPermission("kitchenware:goods_sku:list")
+    @SaIgnore
     @GetMapping("/list")
     public TableDataInfo<GoodsSkuVo> list(GoodsSkuQuery query) {
         return goodsSkuService.queryPageList(query);
@@ -62,7 +63,7 @@ public class GoodsSkuController extends BaseController {
      *
      * @param id 主键
      */
-    @SaCheckPermission(value = {"kitchenware:goods_sku:query", "kitchenware:goods_sku:edit"}, mode = SaMode.OR)
+    @SaIgnore
     @GetMapping("/{id}")
     public R<GoodsSkuVo> getInfo(@NotNull(message = "主键不能为空") @PathVariable Long id) {
         return R.ok(goodsSkuService.queryById(id));

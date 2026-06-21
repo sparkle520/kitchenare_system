@@ -6,6 +6,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.*;
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.annotation.SaMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class GoodsController extends BaseController {
     /**
      * 查询商品列表
      */
-    @SaCheckPermission("kitchenware:goods:list")
+    @SaIgnore
     @GetMapping("/list")
     public TableDataInfo<GoodsVo> list(GoodsQuery query) {
         return goodsService.queryPageList(query);
@@ -63,7 +64,7 @@ public class GoodsController extends BaseController {
      *
      * @param id 主键
      */
-    @SaCheckPermission(value = {"kitchenware:goods:query", "kitchenware:goods:edit"}, mode = SaMode.OR)
+    @SaIgnore
     @GetMapping("/{id}")
     public R<GoodsVo> getInfo(@NotNull(message = "主键不能为空") @PathVariable Long id) {
         return R.ok(goodsService.queryById(id));

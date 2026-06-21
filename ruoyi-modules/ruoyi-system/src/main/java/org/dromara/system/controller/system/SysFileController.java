@@ -1,6 +1,7 @@
 package org.dromara.system.controller.system;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.annotation.SaMode;
 import cn.hutool.core.util.ObjectUtil;
 import jakarta.validation.constraints.NotEmpty;
@@ -80,7 +81,7 @@ public class SysFileController extends BaseController {
      *
      * @param fileIds 文件ID串
      */
-    @SaCheckPermission("system:file:query")
+    @SaIgnore
     @GetMapping("/listByIds/{fileIds}")
     public R<List<SysFileVo>> listByIds(@NotEmpty(message = "主键不能为空") @PathVariable Long[] fileIds) {
         List<SysFileVo> list = fileService.listVoByIds(List.of(fileIds));

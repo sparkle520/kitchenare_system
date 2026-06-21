@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.kitchenware.mapper.CarouselMapper">
+
+    <resultMap id="CarouselResult" autoMapping="true" type="org.dromara.kitchenware.domain.Carousel">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="CarouselResultVo" autoMapping="true" type="org.dromara.kitchenware.domain.vo.CarouselVo">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectCarouselVo">
+        select c.id, c.title, c.image_url, c.description, c.link_type, c.link_url, c.open_type, c.position, c.sort, c.status, c.start_time, c.end_time, c.click_count, c.bg_color, c.create_by, c.create_time, c.update_by, c.update_time, c.remark, c.del_flag from carousel c
+    </sql>
+    <select id="queryList" parameterType="org.dromara.kitchenware.domain.query.CarouselQuery" resultMap="CarouselResultVo">
+        <include refid="selectCarouselVo"/>
+        <where>
+            <if test="title != null and title != ''"> and c.title = #{title}</if>
+            <if test="imageUrl != null and imageUrl != ''"> and c.image_url = #{imageUrl}</if>
+            <if test="description != null and description != ''"> and c.description = #{description}</if>
+            <if test="linkType != null"> and c.link_type = #{linkType}</if>
+            <if test="linkUrl != null and linkUrl != ''"> and c.link_url = #{linkUrl}</if>
+            <if test="openType != null"> and c.open_type = #{openType}</if>
+            <if test="position != null and position != ''"> and c.position = #{position}</if>
+            <if test="sort != null"> and c.sort = #{sort}</if>
+            <if test="status != null"> and c.status = #{status}</if>
+            <if test="startTime != null"> and c.start_time = #{startTime}</if>
+            <if test="endTime != null"> and c.end_time = #{endTime}</if>
+            <if test="clickCount != null"> and c.click_count = #{clickCount}</if>
+            <if test="bgColor != null and bgColor != ''"> and c.bg_color = #{bgColor}</if>
+            and c.del_flag = '0'
+        </where>
+    </select>
+
+</mapper>
