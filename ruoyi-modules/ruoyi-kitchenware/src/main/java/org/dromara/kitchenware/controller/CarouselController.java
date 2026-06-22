@@ -47,6 +47,15 @@ public class CarouselController extends BaseController {
     }
 
     /**
+     * 查询轮播图列表（匿名访问）
+     */
+
+    @GetMapping("/front/list")
+    public TableDataInfo<CarouselVo> frontList(CarouselQuery query) {
+        return carouselService.queryPageList(query);
+    }
+
+    /**
      * 导出轮播图列表
      */
     @SaCheckPermission("kitchenware:carousel:export")

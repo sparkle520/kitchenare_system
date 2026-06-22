@@ -160,6 +160,7 @@ security:
     - /*/api-docs
     - /*/api-docs/**
     - /warm-flow-ui/token-name
+    - /kitchenware/carousel/front/**
 
 # 多租户配置
 tenant:
